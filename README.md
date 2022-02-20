@@ -1,6 +1,6 @@
 # tn.esprit.PiDev.WellBeing
-
-## Add User 
+## User
+### Add User 
 {
   "active": true,
   "dateOfBirth": "1995-01-01T04:15:35.515Z",
@@ -31,4 +31,17 @@
       "role": "organizer"
     }
   ]
+}
+
+## Event
+### Add Event
+{
+  "id": 0,
+  "name": "Event Name",
+  "description": "Event info",
+  "picture": "eventpic.jpg",
+  "location": "Event location",
+  "maxParticipants": 22,
+  "startDate": "2022-02-21T05:02:53.553Z",
+  "endDate": "2022-02-22T05:02:53.553Z"
 }

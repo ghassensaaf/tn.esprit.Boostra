@@ -39,7 +39,8 @@ public class Event implements Serializable{
 	String picture;
 	Date startDate;
 	Date endDate;
-	int nbrParticipant;
+	int participantCount;
+	int maxParticipants;
 	
 	@ManyToMany(mappedBy="Events")
 	private List<User> Users;
