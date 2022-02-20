@@ -51,6 +51,6 @@ public class Activity implements Serializable{
 	@ManyToMany(mappedBy="Activities")
 	private List<User> Users;
 	
-	@OneToMany
+	@OneToMany(mappedBy="activity")
 	List<Subscription> subs;
 }

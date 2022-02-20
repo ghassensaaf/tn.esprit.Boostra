@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -36,24 +38,17 @@ public class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
+	String userName;
 	String firstName;
 	String lastName;
 	Date dateOfBirth;
 	String email;
 	String picture;
-	String login;
 	String password;
 	Boolean active;
 	@Enumerated(EnumType.STRING)
 	Gender gender;
-	@Enumerated(EnumType.STRING)
-	Role role;
-	
-	
-	enum Role{
-		employe,moderator,administrator,organizer
-	}
-	
+
 	enum Gender{
 		Male,Female
 	}
@@ -63,7 +58,7 @@ public class User implements Serializable{
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Activity> Activities;
 	
-	@OneToMany
+	@OneToMany(mappedBy="user")
 	List<Subscription> subs;
 	
 	@OneToMany(mappedBy="user")
@@ -92,4 +87,7 @@ public class User implements Serializable{
 	
 	@ManyToMany
 	private List<Search> searches;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	private Set<Role> roles;
 }
