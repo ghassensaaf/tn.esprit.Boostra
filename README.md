@@ -10,7 +10,6 @@
   "gender": "Male",
   "id": 0,
   "lastName": "Saaf",
-  "login": "saafghassen",
   "password": "azerty123",
   "picture": "pic.jpg",
   "userName": "saafghassen",
