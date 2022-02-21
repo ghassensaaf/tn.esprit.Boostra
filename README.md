@@ -1,6 +1,7 @@
 # tn.esprit.PiDev.WellBeing
 ## User
 ### Add User 
+```json
 {
   "active": true,
   "dateOfBirth": "1995-01-01T04:15:35.515Z",
@@ -32,9 +33,10 @@
     }
   ]
 }
-
+```
 ## Event
 ### Add Event
+```json
 {
   "id": 0,
   "name": "Event Name",
@@ -45,3 +47,4 @@
   "startDate": "2022-02-21T05:02:53.553Z",
   "endDate": "2022-02-22T05:02:53.553Z"
 }
+v
