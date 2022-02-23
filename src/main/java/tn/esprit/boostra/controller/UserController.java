@@ -3,7 +3,6 @@ package tn.esprit.boostra.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
 import tn.esprit.boostra.entity.User;
 import tn.esprit.boostra.service.UserService;
 
@@ -24,19 +23,21 @@ public class UserController {
 		}
 		return msg;
 	}
-
-	@GetMapping("getUserById/{idUser}")
-	public String getUserById(@PathVariable("idUser") int idUser) {
-		return "Bonjour, je suis dans la méthode getUserById et l'id " + idUser;
+	@PostMapping("/joinEvent")
+	public String joinEvent(@RequestParam("uname") String uname, @RequestParam("eventId") long eventId) {
+		if(us.joinEvent(uname, eventId)==1)
+			return "user : "+ uname + ", joined event: " + eventId;
+		else if(us.joinEvent(uname, eventId)== -1)
+			return "user : "+ uname + ", is already participating in the event: " + eventId;
+		else
+			return "event: " + eventId + " is full";
 	}
-
-	@GetMapping("getAll")
-	public String getAll() {
-		return "Bonjour, je suis dans la méthode getAll ";
-	}
-
-	@GetMapping("sayHello")
-	public String sayHello() {
-		return "Bonjour, je suis dans la méthode sayHello ";
+	
+	@PostMapping("/unjoinEvent")
+	public String unjoinEvent(@RequestParam("uname") String uname, @RequestParam("eventId") long eventId) {
+		if(us.unjoinEvent(uname, eventId))
+			return "user : " + uname + ", unjoined event: " + eventId;
+		else 
+			return "user : " + uname + ", is not participating in the event: " + eventId;
 	}
 }

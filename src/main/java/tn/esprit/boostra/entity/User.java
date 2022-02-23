@@ -53,7 +53,7 @@ public class User implements Serializable{
 		Male,Female
 	}
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Event> Events;
 	
 	@OneToMany(mappedBy="user")
