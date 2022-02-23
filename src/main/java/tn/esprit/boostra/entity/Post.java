@@ -1,6 +1,7 @@
 package tn.esprit.boostra.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -46,4 +48,7 @@ public class Post implements Serializable{
 	
 	@ManyToOne
 	private User user;
+	
+	@OneToMany(mappedBy="post")
+	private List<Comment> comments= new ArrayList<>();
 }
