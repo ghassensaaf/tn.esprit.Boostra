@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -46,6 +48,7 @@ public class Post implements Serializable{
 		Status, Picture, Video
 	}
 	
+	@JsonIgnore
 	@ManyToOne
 	private User user;
 	
