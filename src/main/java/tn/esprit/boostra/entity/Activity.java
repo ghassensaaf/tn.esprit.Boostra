@@ -48,8 +48,6 @@ public class Activity implements Serializable{
 		music,formation,sport,teambuilding
 	}
 
-	@ManyToMany(mappedBy="Activities")
-	private List<User> Users;
 	
 	@OneToMany(mappedBy="activity")
 	List<Subscription> subs;

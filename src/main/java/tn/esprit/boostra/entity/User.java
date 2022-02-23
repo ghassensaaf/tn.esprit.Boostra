@@ -55,8 +55,6 @@ public class User implements Serializable{
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Event> Events;
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Activity> Activities;
 	
 	@OneToMany(mappedBy="user")
 	List<Subscription> subs;
