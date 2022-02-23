@@ -8,7 +8,7 @@ import tn.esprit.boostra.entity.User;
 import tn.esprit.boostra.service.UserService;
 
 @RestController
-public class HomeController {
+public class UserController {
 	@Autowired
 	UserService us;
 
