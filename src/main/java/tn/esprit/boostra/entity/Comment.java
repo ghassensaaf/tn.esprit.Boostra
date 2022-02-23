@@ -38,4 +38,7 @@ public class Comment implements Serializable{
 	User user;
 	@ManyToOne
 	Article article;
+	
+	@ManyToOne
+	Post post;
 }
