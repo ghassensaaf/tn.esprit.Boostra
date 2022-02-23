@@ -54,7 +54,7 @@ public class User implements Serializable{
 	}
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Event> Events;
+	private List<Event> events;
 	
 	@OneToMany(mappedBy="user")
 	List<Subscription> subs;

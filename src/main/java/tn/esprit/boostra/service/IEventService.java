@@ -9,5 +9,5 @@ public interface IEventService {
 	Event updateEvent(Event event);
 	void deleteEvent(Event event);
 	List<Event> getAllEvents();
-	public Event getEvent(long eventId);
+	Event getEvent(long eventId);
 }

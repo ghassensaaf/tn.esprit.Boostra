@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.esprit.boostra.entity.Event;
-import tn.esprit.boostra.service.EventService;
+import tn.esprit.boostra.service.IEventService;
 
 @RestController
 public class EventController {
 
 	@Autowired
-	EventService es;
+	IEventService es;
 	@PostMapping("/event/add-event")
 	public Event addEvent(@RequestBody Event  event) {
 		return es.addEvent(event);

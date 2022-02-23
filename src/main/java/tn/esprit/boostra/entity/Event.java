@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -41,8 +43,8 @@ public class Event implements Serializable{
 	Date endDate;
 	int participantCount;
 	int maxParticipants;
-	
-	@ManyToMany(mappedBy="Events")
+	@JsonIgnore
+	@ManyToMany(mappedBy="events", fetch = FetchType.EAGER)
 	private List<User> Users;
 	@ManyToMany(mappedBy="events")
 	private List<Partner> partners;

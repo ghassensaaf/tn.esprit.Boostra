@@ -1,15 +1,17 @@
 package tn.esprit.boostra.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import tn.esprit.boostra.entity.User;
-import tn.esprit.boostra.service.UserService;
+import tn.esprit.boostra.service.IUserService;
 
 @RestController
 public class UserController {
 	@Autowired
-	UserService us;
+	IUserService us;
 
 	@PostMapping("/registration")
 	public String createNewUser(@RequestBody User user) {
@@ -24,7 +26,14 @@ public class UserController {
 		return msg;
 	}
 	@PostMapping("/joinEvent")
-	public String joinEvent(@RequestParam("uname") String uname, @RequestParam("eventId") long eventId) {
+	public String joinEvent(@RequestParam("eventId") long eventId) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String uname;
+		if (principal instanceof UserDetails) {
+			   uname = ((UserDetails)principal).getUsername();
+		} else {
+			   uname = principal.toString();
+		}
 		if(us.joinEvent(uname, eventId)==1)
 			return "user : "+ uname + ", joined event: " + eventId;
 		else if(us.joinEvent(uname, eventId)== -1)
@@ -34,7 +43,14 @@ public class UserController {
 	}
 	
 	@PostMapping("/unjoinEvent")
-	public String unjoinEvent(@RequestParam("uname") String uname, @RequestParam("eventId") long eventId) {
+	public String unjoinEvent(@RequestParam("eventId") long eventId) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String uname;
+		if (principal instanceof UserDetails) {
+			   uname = ((UserDetails)principal).getUsername();
+		} else {
+			   uname = principal.toString();
+		}
 		if(us.unjoinEvent(uname, eventId))
 			return "user : " + uname + ", unjoined event: " + eventId;
 		else 
