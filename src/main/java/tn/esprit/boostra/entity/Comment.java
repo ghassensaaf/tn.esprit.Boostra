@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -34,8 +36,10 @@ public class Comment implements Serializable{
 	Date date;
 	boolean reply;
 	int likeCount=0;
+	@JsonIgnore
 	@ManyToOne
 	User user;
+	@JsonIgnore
 	@ManyToOne
 	Article article;
 }
