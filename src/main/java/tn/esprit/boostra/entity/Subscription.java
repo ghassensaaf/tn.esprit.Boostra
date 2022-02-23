@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -41,9 +43,10 @@ public class Subscription implements Serializable{
 	enum TypeSub{
 		Monthly,halfYearly,Yearly
 	}
-
+	@JsonIgnore
 	@ManyToOne
 	User user;
+	@JsonIgnore
 	@ManyToOne
 	Activity activity;
 	
