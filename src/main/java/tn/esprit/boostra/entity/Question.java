@@ -3,10 +3,15 @@ package tn.esprit.boostra.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -34,4 +39,7 @@ public class Question implements Serializable {
 	String answer1;
 	String answer2;
 	String answer3;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("questions")
+	Quiz quiz;
 }
