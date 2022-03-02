@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,29 +17,30 @@ import tn.esprit.boostra.entity.Activity;
 import tn.esprit.boostra.service.IActivityService;
 
 @RestController
+@RequestMapping("/activity")
 public class ActivityController {
 	@Autowired
 	IActivityService as;
-	@PostMapping("/activity/add-activity")
+	@PostMapping("/add-activity")
 	public Activity addActivity(@RequestBody Activity  activity) {
 		return as.addActivity(activity);
 	}
-	@PutMapping("/activity/update-activity")
+	@PutMapping("/update-activity")
 	public Activity updateActivity(@RequestParam("activityId") long activityId, @RequestBody Activity  activity) {
 		activity.setId(activityId);
 		return as.updateActivity(activity);
 	}
-	@DeleteMapping("/activity/delete-activity/{activityId}")
+	@DeleteMapping("/delete-activity/{activityId}")
 	public void deleteActivity(@PathVariable("activityId") Long activityId) {
 		Activity activity= as.getActivity(activityId);
 		as.deleteActivity(activity);
 	}
-	@GetMapping("/activity/get-all")
+	@GetMapping("/get-all")
 	public List<Activity> getAll(){
 		return as.getAllActivities();
 	}
 	
-	@GetMapping("/activity/get-activity/{activityId}")
+	@GetMapping("/{activityId}")
 	public Activity getActivity(@PathVariable("activityId") Long activityId){
 		return  as.getActivity(activityId);
 	}

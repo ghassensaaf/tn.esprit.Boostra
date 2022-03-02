@@ -71,6 +71,7 @@ eventId : 1
   "name": "string",
   "nbrParticipants": 0,
   "picture": "string",
-  "typeActivity": "formation"
+  "typeActivity": "formation",
+  "location":"tunisie"
 }
 ```

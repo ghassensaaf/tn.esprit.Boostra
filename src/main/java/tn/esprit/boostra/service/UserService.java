@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import tn.esprit.boostra.entity.Activity;
 import tn.esprit.boostra.entity.Event;
+import tn.esprit.boostra.entity.Interest;
 import tn.esprit.boostra.entity.User;
+import tn.esprit.boostra.repository.ActivityRepository;
 import tn.esprit.boostra.repository.EventRepository;
 import tn.esprit.boostra.repository.UserRepository;
 
@@ -17,6 +20,9 @@ public class UserService implements IUserService{
 	private UserRepository ur;
 	@Autowired
 	private EventRepository er;
+	@Autowired
+	private ActivityRepository ar;
+	
 	BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	
 	@Override
@@ -64,6 +70,47 @@ public class UserService implements IUserService{
 			return true;
 		}
 		else return false;
+	}
+	@Override
+	public int joinActivity(String uname, long activityId) {
+		Activity activity = ar.findById(activityId).orElse(null);
+		User user 	= ur.findByUserName(uname);
+		List<Activity> userActivities= user.getActivities();
+		if (userActivities.contains(activity))
+			return -1;
+		else
+		{
+			if(activity.getMaxParticipants()>activity.getNbrParticipants())
+			{
+				user.getActivities().add(activity);	
+				activity.setNbrParticipants(activity.getNbrParticipants()+1);
+				ur.save(user);
+				ar.save(activity);
+				return 1;
+			}
+			else return 0;
+		}
+	}
+	@Override
+	public boolean unjoinActivity(String uname, long activityId) {
+		Activity activity = ar.findById(activityId).orElse(null);
+		User user 	= ur.findByUserName(uname);
+		List<Activity> userActivities= user.getActivities();
+		if (userActivities.contains(activity))
+		{
+			user.getActivities().remove(activity);	
+			activity.setNbrParticipants(activity.getNbrParticipants()-1);
+			ur.save(user);
+			ar.save(activity);
+			return true;
+		}
+		else return false;
+	}
+	@Override
+	public List<Event> suggestEvent(String uname) {
+		User user 	= ur.findByUserName(uname);
+		List<Interest> userInterests = user.getInterests();
+		return er.suggestedEvents(userInterests);
 	}
 
 }

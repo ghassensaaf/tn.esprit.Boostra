@@ -1,17 +1,14 @@
 package tn.esprit.boostra.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.ManyToMany;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -30,24 +27,13 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Subscription implements Serializable{
+public class Interest implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
-	double price;
-	Date startDate;
-	Date endDate;
-	@Enumerated(EnumType.STRING)
-	TypeSub typeSubscription;
+	String interest;
 	
-	enum TypeSub{
-		Monthly,halfYearly,Yearly
-	}
-	@JsonIgnore
-	@ManyToOne
-	User user;
-	@JsonIgnore
-	@ManyToOne
-	Activity activity;
-	
+	@ManyToMany(mappedBy="interests")
+	private List<User> users;
 }
+

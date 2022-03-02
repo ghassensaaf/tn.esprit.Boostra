@@ -53,11 +53,14 @@ public class User implements Serializable{
 		Male,Female
 	}
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany()
 	private List<Event> events;
 	
-	@OneToMany(mappedBy="user")
-	List<Subscription> subs;
+	@ManyToMany()
+	private List<Activity> activities;
+	
+	@ManyToMany()
+	private List<Interest> interests;
 	
 	@OneToMany(mappedBy="user")
 	List<Article> articles = new ArrayList<>();

@@ -10,4 +10,5 @@ public interface IEventService {
 	void deleteEvent(Event event);
 	List<Event> getAllEvents();
 	Event getEvent(long eventId);
+	String getTomorrowEvents();
 }
