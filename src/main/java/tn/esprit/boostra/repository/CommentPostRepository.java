@@ -12,5 +12,5 @@ import tn.esprit.boostra.entity.Comment;
 public interface CommentPostRepository extends CrudRepository<Comment, Long> {
 
 	@Query("select c from Comment c where c.post IS NOT NULL")
-	List<Comment>findAll();
+	List<Comment> findAll();
 }

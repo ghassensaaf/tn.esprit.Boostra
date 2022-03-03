@@ -10,7 +10,7 @@ public interface ICommentPostService {
 	
 	Comment UpdateComment(Comment comment);
 	void DeleteComment(Comment comment);
-	List<Comment>GetAllComment(Long postId);
+	List<Comment> GetAllComment(Long postId);
 	Comment GetComment(Long CommentId) ;
 	Comment AddComment(Comment comment,Long postId);
 

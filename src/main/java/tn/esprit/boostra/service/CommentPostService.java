@@ -65,8 +65,8 @@ public class CommentPostService implements ICommentPostService {
 
 	@Override
 	public List<Comment> GetAllComment(Long postId) {
-		// TODO Auto-generated method stub
-		return (List<Comment>) cr.findAll();
+		
+		 return (List<Comment>) cr.findAll();
 	}
 
 	@Override

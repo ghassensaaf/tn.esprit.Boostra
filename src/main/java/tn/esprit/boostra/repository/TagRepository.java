@@ -6,12 +6,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import tn.esprit.boostra.entity.Post;
-import tn.esprit.boostra.entity.TypePs;
+import tn.esprit.boostra.entity.Tag;
+
 
 @Repository
-public interface PostRepository extends CrudRepository<Post, Long> {
+public interface TagRepository extends CrudRepository<Tag, Long>{
 
-	@Query("select p from Post p where p.typePost =?1 ")
-	List<Post> Postsbytype1(TypePs type);
+	@Query("select count(t) , t.Tag from Tag t group by t.Tag order by count(t) DESC")
+	List<Object> TrendingTags();
+	
+
+	
 }

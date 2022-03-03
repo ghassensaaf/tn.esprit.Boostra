@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.boostra.entity.Post;
+import tn.esprit.boostra.entity.TypePs;
 import tn.esprit.boostra.entity.User;
 import tn.esprit.boostra.repository.PostRepository;
 import tn.esprit.boostra.repository.UserRepository;
@@ -79,5 +80,12 @@ public class PostService implements IPostService {
 		
 		return pr.findById(PostId).orElse(null);
 	}
+
+	@Override
+	public List<Post> Postsbytype1(TypePs type) {
+		// TODO Auto-generated method stub
+		return pr.Postsbytype1(type);
+	}
+	
 
 }

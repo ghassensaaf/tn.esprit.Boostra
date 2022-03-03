@@ -1,7 +1,10 @@
 package tn.esprit.boostra.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,6 +45,16 @@ public class CommentPostRestController {
 	public void deleteComment(@PathVariable("commentId") Long commentId) {
 		Comment comment=cs.GetComment(commentId);
 		cs.DeleteComment(comment);
+	}
+	
+	@GetMapping("/PostComment/getAllByPost/{postId}")
+	public List<Comment> getAll(@PathVariable("postId") Long postId){
+		return cs.GetAllComment(postId);
+	}
+	
+	@GetMapping("/PostComment/{commentId}")
+	public Comment getByIdComment(@PathVariable("commentId") Long commentId){
+		return  cs.GetComment(commentId);
 	}
 	
 	

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import tn.esprit.boostra.entity.Post;
+import tn.esprit.boostra.entity.TypePs;
 import tn.esprit.boostra.service.IPostService;
 
 
@@ -50,6 +51,17 @@ public class PostRestController {
 	@GetMapping("/post/getpost/{postId}")
 	public Post getByIdPost(@PathVariable("postId") Long postId){
 		return  ps.getByIdPost(postId);
+	}
+	@GetMapping("/post/getpostbytype1")
+	public List<Post> Postsbytype1(@RequestParam("type") int type ) {
+		if(type==1) 
+			return ps.Postsbytype1(TypePs.Status);
+		else if (type==2)
+			return ps.Postsbytype1(TypePs.Picture);
+		else 
+			return ps.Postsbytype1(TypePs.Video);
+
+
 	}
 	
 }
