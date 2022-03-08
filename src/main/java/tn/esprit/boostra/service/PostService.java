@@ -87,5 +87,13 @@ public class PostService implements IPostService {
 		return pr.Postsbytype1(type);
 	}
 	
+	@Override
+	public List<Object> PostsByLocation() {
+		// TODO Auto-generated method stub
+		
+		return pr.PostsByLocation();
+	}
+	
+	
 
 }

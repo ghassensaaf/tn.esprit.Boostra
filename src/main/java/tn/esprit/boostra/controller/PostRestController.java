@@ -1,8 +1,10 @@
 package tn.esprit.boostra.controller;
 
+import java.io.IOException;
 import java.util.List;
 
-import javax.websocket.server.PathParam;
+import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 
 import tn.esprit.boostra.entity.Post;
 import tn.esprit.boostra.entity.TypePs;
+import tn.esprit.boostra.service.GeoIPLocationService;
 import tn.esprit.boostra.service.IPostService;
 
 
@@ -25,9 +29,13 @@ public class PostRestController {
 
 	@Autowired
 	IPostService ps;
+	@Autowired
+	GeoIPLocationService gs;
+	
 	
 	@PostMapping("/post/addPost")
-	public void addPost(@RequestBody Post post) {
+	public void addPost(@RequestBody Post post , HttpServletRequest request) throws IOException, GeoIp2Exception {
+		post.setGeoip(gs.getIpLocation(request));
 		ps.addPost(post);
 	}
 	
@@ -62,6 +70,10 @@ public class PostRestController {
 			return ps.Postsbytype1(TypePs.Video);
 
 
+	}
+	@GetMapping("/post/PostsByLocation")
+	public List<Object> PostsByLocation() {
+		return ps.PostsByLocation();
 	}
 	
 }

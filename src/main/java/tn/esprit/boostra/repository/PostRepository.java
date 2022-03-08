@@ -14,4 +14,7 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 
 	@Query("select p from Post p where p.typePost =?1 ")
 	List<Post> Postsbytype1(TypePs type);
+	
+	@Query("select count(p) from Post p group by p.geoip ")
+	List<Object> PostsByLocation();
 }

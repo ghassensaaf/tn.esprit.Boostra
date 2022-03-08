@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-import tn.esprit.boostra.entity.Activity.TypeAc;
+
 
 @Entity
 @Getter
@@ -58,4 +59,7 @@ public class Post implements Serializable{
 	
 	@ManyToMany
 	private List<Tag> tags= new ArrayList<>();
+	
+	@OneToOne
+	private GeoIP geoip;
 }

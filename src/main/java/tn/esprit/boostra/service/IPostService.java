@@ -13,5 +13,6 @@ public interface IPostService {
 	List<Post> getAll();
 	Post getByIdPost(long PostId);
 	public List<Post> Postsbytype1(TypePs type);
+	public List<Object> PostsByLocation();
 	
 }
