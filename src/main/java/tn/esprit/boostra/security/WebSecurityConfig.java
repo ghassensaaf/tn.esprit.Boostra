@@ -34,6 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/say**").access("hasRole('administrator') or hasRole('moderator') ")
 		.antMatchers("/getAll").access("hasRole('administrator')")
 		.antMatchers("/event/add-event").access("hasRole('organizer')")
+		.antMatchers("/partner**").access("hasRole('organizer')")
+		.antMatchers("/contract**").access("hasRole('organizer')")
 		.anyRequest().authenticated().and().httpBasic().and().csrf().disable();
 	}
 }

@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -51,9 +53,12 @@ public class Partner implements Serializable{
 	
 	@ManyToMany
 	private List<Event> events;
+	
 	@OneToOne(mappedBy="partner")
     private Contract contract;
 	
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="partner")
 	private List<Offer> offers;
 	

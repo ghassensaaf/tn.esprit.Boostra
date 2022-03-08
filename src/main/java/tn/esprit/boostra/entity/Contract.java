@@ -35,15 +35,19 @@ public class Contract implements Serializable{
 	Date startDate;
 	Date endDate; 
 	double price;
+	double priceTND;
+	boolean renewing; 
+	boolean statut ; 
 	@Enumerated(EnumType.STRING)
 	Cuerrency cuerrency;
 	@Enumerated(EnumType.STRING)
+	
 	TypeCont typeContract;
 	
-	enum TypeCont{
+	public enum TypeCont{
 		PerEvent,Monthly,halfYearly,Yearly
 	}
-	enum Cuerrency{
+	public enum Cuerrency{
 		USD,TND,EUR
 	}
 	@OneToOne

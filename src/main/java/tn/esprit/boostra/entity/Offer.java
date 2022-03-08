@@ -28,6 +28,7 @@ public class Offer implements Serializable{
 	long id;
 	String name;
 	Double value;
+	
 	@ManyToOne
 	private Partner partner;
 }
