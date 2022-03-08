@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import nonapi.io.github.classgraph.json.JSONSerializer;
 import tn.esprit.boostra.entity.Contract;
 import tn.esprit.boostra.entity.Partner;
 import tn.esprit.boostra.repository.ContractRepository;
@@ -38,16 +39,22 @@ public class ContractService implements IContractService {
 	@Override
 	public Contract addContract(Contract contract, long partnerId) throws JSONException, IOException {
 		JSONObject json = readJsonFromUrl("https://v6.exchangerate-api.com/v6/49ab5ca8e26fd77d5f131fcd/latest/TND");
-		JSONObject rates = json.getJSONObject("conversion_rates");
+		double valEUR = json.getJSONObject("conversion_rates").getDouble("EUR");
+		double valUSD = json.getJSONObject("conversion_rates").getDouble("USD");
+	
+		//JSONObject rates = json.getJSONObject("conversion_rates");
 		log.info("\n****************************************************************");
-		log.info(rates.toString());
 		
 		
+//		double valeur = json.getDouble("EUR");
+
+		log.info("\n*"+val+"******************************************");
+
 		if (contract.getCuerrency().toString().equals("EUR")) {
-			contract.setPriceTND(contract.getPrice() * 3);
+			contract.setPriceTND(contract.getPrice() / valEUR);
 		} else if (contract.getCuerrency().toString().equals("USD")) {
 
-			contract.setPriceTND(contract.getPrice() * 2);
+			contract.setPriceTND(contract.getPrice() / valUSD);
 		} else {
 			contract.setPriceTND(contract.getPrice());
 		}
