@@ -9,6 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -30,12 +35,17 @@ public class Reclamation implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
+	@NotNull
+	@Size(min=5,max=150)
 	String content;
 	Date date;
+	String statuC;
+	String statuR ;
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	TypeRec typeReclamation;
 	
-	enum TypeRec{
-		technical,information
-	}
+	@JsonIgnore
+	@ManyToOne
+	private User user;
 }

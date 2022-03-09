@@ -32,4 +32,5 @@ public class BadWords implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
 	String word;
+	String nbrstars;
 }
