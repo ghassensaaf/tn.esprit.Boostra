@@ -1,14 +1,11 @@
 package tn.esprit.boostra.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -27,14 +24,11 @@ import lombok.experimental.FieldDefaults;
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class GeoIP {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	 long id;
-	 String ipAddress;
-     String device;
-     String city;
-     String fullLocation;
-     Double latitude;
-     Double longitude;
-     
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY) long id;
+  String ipAddress;
+  String device;
+  String city;
+  String fullLocation;
+  Double latitude;
+  Double longitude;
 }

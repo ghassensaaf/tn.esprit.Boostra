@@ -3,14 +3,12 @@ package tn.esprit.boostra.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -20,7 +18,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-
 @Entity
 @Getter
 @Setter
@@ -29,13 +26,10 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Tag implements Serializable{
+public class Tag implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
-	String Tag;
-	
-	@ManyToMany(mappedBy="tags")
-	private List<Post> posts= new ArrayList<>();
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY) long id;
+  String Tag;
+
+  @ManyToMany(mappedBy = "tags") private List<Post> posts = new ArrayList<>();
 }
