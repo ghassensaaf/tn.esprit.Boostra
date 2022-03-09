@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -40,7 +42,7 @@ public class Partner implements Serializable{
 	String country;
 	String email;
 	String logo;
-	int phone;
+	long phone;
 	
 	@Enumerated(EnumType.STRING)
 	TypePar typePartner;
@@ -48,11 +50,14 @@ public class Partner implements Serializable{
 	enum TypePar{
 		EventPartner,ActivityPartner
 	}
-	
+	@JsonIgnore
 	@ManyToMany
 	private List<Event> events;
+	
 	@OneToOne(mappedBy="partner")
     private Contract contract;
+	
+	
 	
 	@OneToMany(mappedBy="partner")
 	private List<Offer> offers;

@@ -1,6 +1,10 @@
 package tn.esprit.boostra.service;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+
+import org.json.JSONException;
 
 import tn.esprit.boostra.entity.Event;
 
@@ -9,5 +13,6 @@ public interface IEventService {
 	Event updateEvent(Event event);
 	void deleteEvent(Event event);
 	List<Event> getAllEvents();
-	public Event getEvent(long eventId);
+	Event getEvent(long eventId);
+	String getTomorrowEvents() throws IOException, JSONException;
 }

@@ -48,17 +48,23 @@ public class User implements Serializable{
 	Boolean active;
 	Long Number;
 	@Enumerated(EnumType.STRING)
+    private Provider provider;
+	
+	@Enumerated(EnumType.STRING)
 	Gender gender;
 
 	enum Gender{
 		Male,Female
 	}
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Event> Events;
+	@ManyToMany()
+	private List<Event> events;
 	
-	@OneToMany(mappedBy="user")
-	List<Subscription> subs;
+	@ManyToMany()
+	private List<Activity> activities;
+	
+	@ManyToMany()
+	private List<Interest> interests;
 	
 	@OneToMany(mappedBy="user")
 	List<Article> articles = new ArrayList<>();
@@ -83,6 +89,7 @@ public class User implements Serializable{
 	
 	@OneToMany(mappedBy="user")
 	List<Notification> notifications= new ArrayList<>();
+		 
 	
 	@ManyToOne
 	private Badge badge;

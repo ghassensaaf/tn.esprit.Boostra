@@ -46,4 +46,32 @@
   "startDate": "2022-02-21T05:02:53.553Z",
   "endDate": "2022-02-22T05:02:53.553Z"
 }
-v
+```
+### edit Event
+
+```json
+{
+  "name": "Event Name",
+  "description": "Event info",
+  "picture": "eventpic.jpg",
+  "location": "Event location",
+  "maxParticipants": 22,
+  "startDate": "2022-02-21T05:02:53.553Z",
+  "endDate": "2022-02-22T05:02:53.553Z"
+}
+```
+eventId : 1
+## Activity
+### Add activity
+```json
+{
+  "description": "string",
+  "id": 0,
+  "maxParticipants": 0,
+  "name": "string",
+  "nbrParticipants": 0,
+  "picture": "string",
+  "typeActivity": "formation",
+  "location":"tunisie"
+}
+```

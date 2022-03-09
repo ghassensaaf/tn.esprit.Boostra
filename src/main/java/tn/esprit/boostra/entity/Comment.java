@@ -36,10 +36,15 @@ public class Comment implements Serializable{
 	Date date;
 	boolean reply;
 	int likeCount=0;
+
 	@JsonIgnore
 	@ManyToOne
 	User user;
 	@JsonIgnore
 	@ManyToOne
 	Article article;
+	
+	@JsonIgnore
+	@ManyToOne
+	Post post;
 }
