@@ -40,8 +40,16 @@ public class TagService implements ITagService{
 	@Override
 	public void AddTagAffectToPost(List<Tag> tags, long postId) {
 		Post p = pr.findById(postId).orElse(new Post());
-		p.getTags().addAll(tags);
-		tr.saveAll(tags);
+		for (Tag tag : tags) {
+			Tag t = null;
+			t = tr.findTopByTag(tag.getTag());
+			if(t==null) {
+				p.getTags().add(tag);
+				tr.save(tag);				
+			}
+			else
+				p.getTags().add(t);
+		}
 		pr.save(p);
 	}
 

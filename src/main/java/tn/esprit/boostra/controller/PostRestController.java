@@ -22,6 +22,7 @@ import tn.esprit.boostra.entity.Post;
 import tn.esprit.boostra.entity.TypePs;
 import tn.esprit.boostra.service.GeoIPLocationService;
 import tn.esprit.boostra.service.IPostService;
+import tn.esprit.boostra.service.ITagService;
 
 
 @RestController
@@ -32,6 +33,8 @@ public class PostRestController {
 	@Autowired
 	GeoIPLocationService gs;
 	
+	@Autowired
+	ITagService ts;
 	
 	@PostMapping("/post/addPost")
 	public void addPost(@RequestBody Post post , HttpServletRequest request) throws IOException, GeoIp2Exception {
@@ -75,6 +78,10 @@ public class PostRestController {
 	public List<Object> PostsByLocation() {
 		return ps.PostsByLocation();
 	}
-	
+	@GetMapping("/post/getpostbytag")
+	public List<Post> Postsbytag(@RequestParam("tagId") long tagId ) {
+		
+	return ps.Postsbytag(tagId);
+	}
 }
 

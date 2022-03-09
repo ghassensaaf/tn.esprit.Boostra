@@ -1,5 +1,6 @@
 package tn.esprit.boostra.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.boostra.entity.Post;
+import tn.esprit.boostra.entity.Tag;
 import tn.esprit.boostra.entity.TypePs;
 import tn.esprit.boostra.entity.User;
 import tn.esprit.boostra.repository.PostRepository;
+import tn.esprit.boostra.repository.TagRepository;
 import tn.esprit.boostra.repository.UserRepository;
 
 @Service
@@ -21,6 +24,9 @@ public class PostService implements IPostService {
 	
 	@Autowired
 	UserRepository ur;
+	
+	@Autowired
+	TagRepository tr;
 	
 	@Override
 	public Post addPost(Post post) {
@@ -48,6 +54,8 @@ public class PostService implements IPostService {
 			   username = principal.toString();
 			}
 		User user=ur.findByUserName(username);
+		Post p=pr.findById(post.getId()).orElse(post);
+		post.setGeoip(p.getGeoip());
 		post.setUser(user);
 		return pr.save(post);
 	}
@@ -92,6 +100,19 @@ public class PostService implements IPostService {
 		// TODO Auto-generated method stub
 		
 		return pr.PostsByLocation();
+	}
+
+	@Override
+	public List<Post> Postsbytag(long tagId) {
+		// TODO Auto-generated method stub
+		Tag t=tr.findById(tagId).orElse(null);
+		List<Post> posts = (List<Post>) pr.findAll();
+		List<Post> res = new ArrayList<Post>();
+		for (Post post : posts) {
+			if(post.getTags().contains(t))
+				res.add(post);
+		}
+		return res;
 	}
 	
 	

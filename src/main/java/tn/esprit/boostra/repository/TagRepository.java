@@ -12,8 +12,10 @@ import tn.esprit.boostra.entity.Tag;
 @Repository
 public interface TagRepository extends CrudRepository<Tag, Long>{
 
-	@Query("select count(t) , t.Tag from Tag t group by t.Tag order by count(t) DESC")
+	@Query("select count(t) , t.tag from Tag t group by t.tag order by count(t) DESC")
 	List<Object> TrendingTags();
+	
+	Tag findTopByTag(String tag);
 	
 
 	

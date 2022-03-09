@@ -3,6 +3,7 @@ package tn.esprit.boostra.service;
 import java.util.List;
 
 import tn.esprit.boostra.entity.Post;
+import tn.esprit.boostra.entity.Tag;
 import tn.esprit.boostra.entity.TypePs;
 
 public interface IPostService {
@@ -14,5 +15,6 @@ public interface IPostService {
 	Post getByIdPost(long PostId);
 	public List<Post> Postsbytype1(TypePs type);
 	public List<Object> PostsByLocation();
+	public List<Post> Postsbytag(long tagId);
 	
 }
