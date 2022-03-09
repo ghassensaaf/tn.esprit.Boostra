@@ -1,13 +1,9 @@
 package tn.esprit.boostra.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -17,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-
+import java.io.Serializable;
 @Entity
 @Getter
 @Setter
@@ -26,14 +22,16 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Sender implements Serializable{
+
+public class MessageDTO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
-	String body;
-	Date date;
-	@ManyToOne
-	private User user;
-	
+	long idsender;
+    long idreciver;
+	String content;
 	
 }
+	
+
+

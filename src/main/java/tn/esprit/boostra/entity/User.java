@@ -81,11 +81,18 @@ public class User implements Serializable{
 	@OneToMany(mappedBy="user")
 	List<NoteQuiz> notes= new ArrayList<>();
 	
-	@OneToMany(mappedBy="user")
-	List<Sender> senders= new ArrayList<>();
+//	@OneToMany(mappedBy="user")
+//	List<MessageDTO2> senders= new ArrayList<>();
+//	
+//	@OneToMany(mappedBy="user")
+//	List<MessageDTO> receivers= new ArrayList<>();
+	@OneToMany(mappedBy = "sender")
 	
-	@OneToMany(mappedBy="user")
-	List<Receiver> receivers= new ArrayList<>();
+	private List<Message> messagesSent;
+
+	@OneToMany(mappedBy = "receiver")
+	
+	private List<Message> messagesReceived;
 	
 	@OneToMany(mappedBy="user")
 	List<Notification> notifications= new ArrayList<>();

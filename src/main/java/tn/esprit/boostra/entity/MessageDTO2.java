@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+
 @Entity
 @Getter
 @Setter
@@ -26,12 +27,13 @@ import lombok.experimental.FieldDefaults;
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-public class Receiver implements Serializable{
+	
+public class MessageDTO2 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
-	String body;
-	Date date;
-	@ManyToOne
-	private User user;
+	 long id;
+	 String userName;
+	 String image;
+	 String msg;
+	 Date date;
 }

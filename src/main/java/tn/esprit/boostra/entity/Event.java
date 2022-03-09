@@ -12,6 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,7 +46,11 @@ public class Event implements Serializable{
 	String description;
 	String location;
 	String picture;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern ="yyyy-MM-dd",shape = Shape.STRING)
 	Date startDate;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern ="yyyy-MM-dd",shape = Shape.STRING)
 	Date endDate;
 	Double Price;
 	int participantCount;
@@ -54,6 +64,7 @@ public class Event implements Serializable{
 	private List<Partner> partners;
 	
 	@OneToMany(mappedBy="event")
+	@JsonIgnore
 	private List<Ad> ads ;
 
 	@JsonIgnore
