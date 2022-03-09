@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 import tn.esprit.boostra.entity.Event;
 import tn.esprit.boostra.service.IEventService;
+
 import tn.esprit.boostra.service.IInterestService;
+
 
 @RestController
 @Slf4j
@@ -31,6 +33,7 @@ public class EventController {
 	IEventService es;
 	@Autowired
 	IInterestService is;
+
 	@PostMapping("/event/add-event")
 	public Event addEvent(@RequestBody Event  event, @RequestParam("interestId") long interestId) {
 		event = es.addEvent(event);

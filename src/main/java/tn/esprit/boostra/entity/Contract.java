@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -31,20 +35,28 @@ public class Contract implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
+	@Temporal(TemporalType.DATE)
 	Date startDate;
+	@Temporal(TemporalType.DATE)
 	Date endDate; 
 	double price;
+	double priceTND;
+	boolean renewing; 
+	boolean statut ; 
 	@Enumerated(EnumType.STRING)
 	Cuerrency cuerrency;
 	@Enumerated(EnumType.STRING)
+	
 	TypeCont typeContract;
 	
-	enum TypeCont{
+	public enum TypeCont{
 		PerEvent,Monthly,halfYearly,Yearly
 	}
-	enum Cuerrency{
-		USD,TND,EUR
+	public enum Cuerrency{
+		USD,TND,EUR,TRY
 	}
+	
+	@JsonIgnore
 	@OneToOne
 	private Partner partner;
 }
