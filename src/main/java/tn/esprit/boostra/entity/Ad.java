@@ -8,6 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -31,8 +37,22 @@ public class Ad implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern ="yyyy-MM-dd",shape = Shape.STRING)
 	Date StartDate;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern ="yyyy-MM-dd",shape = Shape.STRING)
 	Date endDate;
+	String reseauxSociaux;
 	@ManyToOne
 	private Event event;
+	public Ad(Date startDate, Date endDate  ) {
+		super();
+		StartDate = startDate;
+		this.endDate = endDate;
+	}
+	
+	
+	
+	
 }
