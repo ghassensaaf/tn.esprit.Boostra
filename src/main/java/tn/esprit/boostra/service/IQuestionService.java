@@ -12,6 +12,6 @@ public interface IQuestionService {
 	public void deleteQuestion(Long id);
 	public void  deleteAllQuestion();
 	public void addandsignquestion(Question question,Long idQuiz);
-	//public Question assignQuestiontoQuiz(Long idQuestion, Long idQuiz);
+	
 
 }

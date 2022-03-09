@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.boostra.entity.Badge;
+import tn.esprit.boostra.entity.Badge.Rank;
 import tn.esprit.boostra.repository.BadgeRepository;
 
 @Service
@@ -46,6 +47,16 @@ public class BadgeService implements IBadgeService {
 	@Override
 	public void deleteAllBadge() {
 		badgeRepository.deleteAll();
+	}
+
+	@Override
+	public Badge findBytypeBadge(String badgetype) {
+		return badgeRepository.findBytypeBadge(badgetype);
+	}
+
+	@Override
+	public Badge findBytypeBadgeAndrankbadge(String typeBadge, Rank rankbadge) {
+		return badgeRepository.findByTypeBadgeAndRankBadge(typeBadge,rankbadge);
 	}
 
 }

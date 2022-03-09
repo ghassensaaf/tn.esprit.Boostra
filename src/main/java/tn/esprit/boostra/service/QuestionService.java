@@ -42,30 +42,18 @@ public class QuestionService implements IQuestionService {
 	}
 	@Override
 	public void deleteQuestion(Long id) {
-		questionRepository.deleteById(id);
-		
+		questionRepository.deleteById(id);	
 	}
 	@Override
 	public void deleteAllQuestion() {
 		questionRepository.deleteAll();
-		
 	}
-//	@Override
-//	public Question assignQuestiontoQuiz(Long idQuestion, Long idQuiz) {
-//		// TODO Auto-generated method stub
-//		Question question=questionRepository.findById(idQuestion).get();
-//		Quiz quiz=quizRepository.findById(idQuiz).get();
-//		question.setQuiz(quiz);
-//		return questionRepository.save(question);
-//		//fi dessign nahi el stock a fi setstock f blasset stock nhot null
-//	}
-//	
+	
 	@Override
 	public void addandsignquestion(Question question, Long idQuiz) {
 		Quiz quiz=quizRepository.findById(idQuiz).orElse(new Quiz());
 		question.setQuiz(quiz);
-		questionRepository.save(question);
-		
+		questionRepository.save(question);	
 	}
 	
 	

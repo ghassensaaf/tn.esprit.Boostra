@@ -40,6 +40,6 @@ public class Question implements Serializable {
 	String answer2;
 	String answer3;
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("questions")
+	//@JsonIgnoreProperties("questions")
 	Quiz quiz;
 }

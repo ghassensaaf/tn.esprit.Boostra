@@ -22,5 +22,10 @@ public class UserService implements IUserService{
 	public User findUserByUserName(String uName) {
 		return ur.findByUserName(uName);
 	}
+	@Override
+	public User updateUser(User user, Long id) {
+		user.setId(id);
+		  return ur.save(user);	
+	}
 
 }

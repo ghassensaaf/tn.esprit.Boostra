@@ -2,11 +2,15 @@ package tn.esprit.boostra.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -29,10 +33,15 @@ public class NoteQuiz implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
 	int note;
+	long eventId;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	//@JsonIgnoreProperties("notes")
+	@JsonIgnore
 	User user;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	//@JsonIgnoreProperties("notes")
+	@JsonIgnore
 	Quiz quiz;
 	
 }
