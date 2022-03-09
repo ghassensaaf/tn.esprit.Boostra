@@ -1,5 +1,3 @@
 package tn.esprit.boostra.service;
 
-public interface IReceiverService {
-
-}
+public interface IReceiverService {}

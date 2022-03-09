@@ -2,7 +2,6 @@ package tn.esprit.boostra.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -32,26 +30,19 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class Message implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-	 long idMessage;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	@Column(columnDefinition = "MEDIUMTEXT")
-	 String content;
+  long idMessage;
 
-	@ManyToOne
-	@JoinColumn(name = "id_sender")
-	
-	 User sender;
+  @Column(columnDefinition = "MEDIUMTEXT") String content;
 
-	@ManyToOne
-	@JoinColumn(name = "id_receiver")
-	 User receiver;
+  @ManyToOne
+  @JoinColumn(name = "id_sender")
 
-	@Temporal(TemporalType.TIMESTAMP)
-	 Date date;
+  User sender;
 
-	
+  @ManyToOne @JoinColumn(name = "id_receiver") User receiver;
 
+  @Temporal(TemporalType.TIMESTAMP) Date date;
 }
