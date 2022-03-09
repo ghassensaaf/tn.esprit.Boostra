@@ -47,6 +47,9 @@ public class User implements Serializable{
 	String password;
 	Boolean active;
 	@Enumerated(EnumType.STRING)
+    private Provider provider;
+	
+	@Enumerated(EnumType.STRING)
 	Gender gender;
 
 	enum Gender{
@@ -82,6 +85,7 @@ public class User implements Serializable{
 	
 	@OneToMany(mappedBy="user")
 	List<Notification> notifications= new ArrayList<>();
+		 
 	
 	@ManyToOne
 	private Badge badge;

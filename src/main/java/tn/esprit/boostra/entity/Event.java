@@ -42,6 +42,7 @@ public class Event implements Serializable{
 	String picture;
 	Date startDate;
 	Date endDate;
+	Double Price;
 	int participantCount;
 	int maxParticipants;
 	

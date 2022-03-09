@@ -1,7 +1,9 @@
 package tn.esprit.boostra.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +26,7 @@ import tn.esprit.boostra.service.IInterestService;
 @Slf4j
 public class EventController {
 
+	
 	@Autowired
 	IEventService es;
 	@Autowired
@@ -53,8 +56,8 @@ public class EventController {
 	public Event getEvent(@PathVariable("eventId") Long eventId){
 		return  es.getEvent(eventId);
 	}
-	@Scheduled(cron = "*/10 * * * * *")
-	public void getTomorrowEvents(){
+	@Scheduled(cron = "* */10 * * * *")
+	public void getTomorrowEvents() throws JSONException, IOException{
 		
 		log.info(es.getTomorrowEvents());
 	}

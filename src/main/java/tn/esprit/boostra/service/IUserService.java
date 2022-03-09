@@ -13,4 +13,5 @@ public interface IUserService {
  int joinActivity(String uname, long activityId);
  boolean unjoinActivity(String uname, long activityId);
  List<Event> suggestEvent(String uname);
+void processOAuthPostLogin(String uname, String fname, String lname, String picture);
 }

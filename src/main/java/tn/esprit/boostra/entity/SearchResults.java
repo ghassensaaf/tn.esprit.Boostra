@@ -1,16 +1,13 @@
 package tn.esprit.boostra.entity;
 
-import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,7 +18,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,13 +25,15 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Interest implements Serializable{
+@Document("searchResults")
+public class SearchResults {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
-	String interest;
-	@JsonIgnore
-	@ManyToMany(mappedBy="interests")
-	private List<User> users;
+	@GeneratedValue
+	String searchCode=UUID.randomUUID().toString();
+	String status;
+	long userId;
+	String userName;
+	Date dateTime;
+	int count;
+	List<Event> events;
 }
-

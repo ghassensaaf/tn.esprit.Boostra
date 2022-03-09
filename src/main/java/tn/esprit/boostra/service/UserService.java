@@ -1,19 +1,26 @@
 package tn.esprit.boostra.service;
 
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import tn.esprit.boostra.entity.Activity;
 import tn.esprit.boostra.entity.Event;
 import tn.esprit.boostra.entity.Interest;
+import tn.esprit.boostra.entity.Provider;
 import tn.esprit.boostra.entity.User;
 import tn.esprit.boostra.repository.ActivityRepository;
 import tn.esprit.boostra.repository.EventRepository;
 import tn.esprit.boostra.repository.UserRepository;
-
+@Slf4j
 @Service
 public class UserService implements IUserService{
 	@Autowired
@@ -22,6 +29,8 @@ public class UserService implements IUserService{
 	private EventRepository er;
 	@Autowired
 	private ActivityRepository ar;
+	@Autowired
+	private JavaMailSender emailSender;
 	
 	BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	
@@ -50,6 +59,12 @@ public class UserService implements IUserService{
 				event.setParticipantCount(event.getParticipantCount()+1);
 				ur.save(user);
 				er.save(event);
+//				SimpleMailMessage message = new SimpleMailMessage();
+//				message.setFrom("boostra@boostra.tn	");
+//		        message.setTo("saafghassen@gmail.com"); 
+//		        message.setSubject("hello"); 
+//		        message.setText("test");
+//		        emailSender.send(message);
 				return 1;
 			}
 			else return 0;
@@ -108,9 +123,44 @@ public class UserService implements IUserService{
 	}
 	@Override
 	public List<Event> suggestEvent(String uname) {
-		User user 	= ur.findByUserName(uname);
+		User user 	= ur.findByEmail(uname);
 		List<Interest> userInterests = user.getInterests();
 		return er.suggestedEvents(userInterests);
+	}
+	@Override
+	public void processOAuthPostLogin(String uname,String fname, String lname, String picture) {
+        User existUser = ur.findByUserName(uname);
+        log.info(uname);
+        if (existUser == null) {
+            User newUser = new User();
+            newUser.setUserName(uname.replace("@gmail.com", ""));
+            newUser.setProvider(Provider.GOOGLE);
+            newUser.setActive(true);
+            newUser.setEmail(uname);
+            newUser.setFirstName(fname);
+            newUser.setLastName(lname);
+            newUser.setPicture(picture);
+            ur.save(newUser);        
+        }
+         
+    }
+	
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+	    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+	    mailSender.setHost("mail.lancersent.tn");
+	    mailSender.setPort(587);
+	    
+	    mailSender.setUsername("info@lancersent.tn");
+	    mailSender.setPassword("Za3maettal3ou");
+	    
+	    Properties props = mailSender.getJavaMailProperties();
+	    props.put("mail.transport.protocol", "smtp");
+	    props.put("mail.smtp.auth", "true");
+	    props.put("mail.smtp.starttls.enable", "true");
+	    props.put("mail.debug", "true");
+	    
+	    return mailSender;
 	}
 
 }
