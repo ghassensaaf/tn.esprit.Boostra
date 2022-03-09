@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
@@ -34,12 +35,12 @@ public class Badge implements Serializable{
 	long id;
 	String picture;
 	String description;
+	String typeBadge;
 	@Enumerated(EnumType.STRING)
-	TypeBa typeBadge;
-	enum TypeBa{
-		Bronze, Silver, Gold
+	Rank rankBadge;
+	public enum Rank{
+		Bronze,Silver,Gold
 	}
-	
-	@OneToMany(mappedBy="badge")
+	@ManyToMany(mappedBy="badges")
 	List<User> users= new ArrayList<>();
 }

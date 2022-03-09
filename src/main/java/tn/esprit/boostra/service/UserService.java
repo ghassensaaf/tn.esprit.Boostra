@@ -43,6 +43,10 @@ public class UserService implements IUserService{
 		return ur.findByUserName(uName);
 	}
 	@Override
+	public User updateUser(User user, Long id) {
+		user.setId(id);
+		  return ur.save(user);	
+	}
 	public int joinEvent(String uname, long eventId) {
 		Event event = er.findById(eventId).orElse(null);
 		User user 	= ur.findByUserName(uname);
@@ -136,6 +140,6 @@ public class UserService implements IUserService{
         }
          
     }
-	
+
 
 }

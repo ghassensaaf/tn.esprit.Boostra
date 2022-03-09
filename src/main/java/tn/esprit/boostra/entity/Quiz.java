@@ -12,6 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -34,15 +41,32 @@ public class Quiz implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
 	String name;
+	String type;
 	@Enumerated(EnumType.STRING)
 	TypeQu typeQuiz;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern ="yyyy-MM-dd",shape =Shape.STRING)
 	Date startDate;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern ="yyyy-MM-dd",shape =Shape.STRING)
 	Date endDate;
 	int questionCount;
-	enum TypeQu{
+	String theme;
+	@Enumerated(EnumType.STRING)
+	Level level;
+	public enum TypeQu{
 		Evaluation, Knowledge
 	}
+	public enum Level{
+		Easy,Medium,Hard,None
+	}
 	@OneToMany(mappedBy="quiz")
+	//@JsonIgnoreProperties("quiz")
+	@JsonIgnore
 	List<NoteQuiz> notes= new ArrayList<>();
+	@OneToMany(mappedBy = "quiz")
+	//@JsonIgnoreProperties("quiz")
+	@JsonIgnore
+	List<Question> questions;
 
 }

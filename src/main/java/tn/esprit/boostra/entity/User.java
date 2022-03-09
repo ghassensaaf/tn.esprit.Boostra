@@ -46,10 +46,14 @@ public class User implements Serializable{
 	String picture;
 	String password;
 	Boolean active;
+
+	int fidelite;
+
 	Long Number;
 	@Enumerated(EnumType.STRING)
     private Provider provider;
 	
+
 	@Enumerated(EnumType.STRING)
 	Gender gender;
 
@@ -98,8 +102,8 @@ public class User implements Serializable{
 	List<Notification> notifications= new ArrayList<>();
 		 
 	
-	@ManyToOne
-	private Badge badge;
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<Badge>badges;
 	
 	@ManyToMany
 	private List<Search> searches;
