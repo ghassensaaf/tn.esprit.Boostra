@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EventRepository  extends CrudRepository<Event, Long> {
 
-  List<Event> findAllBystartDateLessThanEqualAndBystartDateGreaterThanEqual(Date d);
+//	List<Event> findAllBystartDateLessThanEqualAndBystartDateGreaterThanEqual(Date d);
   
 	@Query("select e from Event e where e.interest IN ?1")
 	List<Event> suggestedEvents(List<Interest> userInterests);
