@@ -11,5 +11,7 @@ public interface IAdService {
 	 public Ad updateAd(Ad ad,Long id);
 	 public void deleteAdById(Long id);
 	 public void deleteAllAd();
-
+     public List<Ad> AdResaux(String ReseauxSociaux);
+     public void addAndAssignAd(Ad ad,Long id);
+     public List<String> getListResaux();
 }

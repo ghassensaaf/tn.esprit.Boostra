@@ -11,6 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -37,15 +43,21 @@ public class Event implements Serializable{
 	String description;
 	String location;
 	String picture;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern ="yyyy-MM-dd",shape = Shape.STRING)
 	Date startDate;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern ="yyyy-MM-dd",shape = Shape.STRING)
 	Date endDate;
 	int nbrParticipant;
 	
 	@ManyToMany(mappedBy="Events")
+	@JsonIgnore
 	private List<User> Users;
 	@ManyToMany(mappedBy="events")
 	private List<Partner> partners;
 	
 	@OneToMany(mappedBy="event")
+	@JsonIgnore
 	private List<Ad> ads ;
 }

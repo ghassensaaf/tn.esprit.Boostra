@@ -3,6 +3,7 @@ package tn.esprit.boostra.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import tn.esprit.boostra.entity.Event;
 import tn.esprit.boostra.entity.Notification;
 import tn.esprit.boostra.service.INotificationService;
 
@@ -55,6 +56,26 @@ public void deleteNotificationById(@PathVariable("idNotification") Long idNotifi
 public void deleteAllNotifications() {
 	inotificationservice.deleteAllNotification();
 
+}
+@GetMapping(value = "/getTempsAttenteEvent/{idEvent}")
+@ResponseBody
+public String getTempsAttenteEvent(@PathVariable("idEvent")Long idEvent) {
+	return inotificationservice.getTempsAttenteEvent(idEvent);
+}
+@Scheduled(fixedRate=10000)
+public void CheckEventsToday() {
+	
+	List<Event> lst = inotificationservice.getEventsToday();
+	
+	for (Event event : lst) {
+		System.out.println("  You have an event today: " + event.getDescription() + "\n" );
+	}
+}
+
+@GetMapping(value = "/getUpcomingEvents")
+@ResponseBody
+public List<Event> getUpcomingEvents() {
+	return inotificationservice.getUpcomingEvents();
 }
 
 }

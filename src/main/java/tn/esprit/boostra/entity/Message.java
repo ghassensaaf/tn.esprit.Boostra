@@ -3,17 +3,15 @@ package tn.esprit.boostra.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -32,27 +30,28 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Ad implements Serializable{
 
+public class Message implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
-	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern ="yyyy-MM-dd",shape = Shape.STRING)
-	Date StartDate;
-	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern ="yyyy-MM-dd",shape = Shape.STRING)
-	Date endDate;
-	String reseauxSociaux;
+	
+	 long idMessage;
+
+	@Column(columnDefinition = "MEDIUMTEXT")
+	 String content;
+
 	@ManyToOne
-	private Event event;
-	public Ad(Date startDate, Date endDate  ) {
-		super();
-		StartDate = startDate;
-		this.endDate = endDate;
-	}
+	@JoinColumn(name = "id_sender")
 	
+	 User sender;
+
+	@ManyToOne
+	@JoinColumn(name = "id_receiver")
+	 User receiver;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	 Date date;
+
 	
-	
-	
+
 }
