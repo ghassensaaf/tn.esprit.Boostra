@@ -1,5 +1,3 @@
 package tn.esprit.boostra.entity;
 
-public enum TypeRec{
-	technical,information,System
-}
+public enum TypeRec { technical, information, System }

@@ -14,8 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableMongoRepositories
 public class BoostraApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BoostraApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(BoostraApplication.class, args);
+  }
 }

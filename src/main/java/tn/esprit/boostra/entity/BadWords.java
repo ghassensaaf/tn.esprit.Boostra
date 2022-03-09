@@ -3,12 +3,10 @@ package tn.esprit.boostra.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -27,10 +25,8 @@ import tn.esprit.boostra.entity.Article.TypeAr;
 @ToString
 @EqualsAndHashCode
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BadWords implements Serializable{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id;
-	String word;
-	String nbrstars;
+public class BadWords implements Serializable {
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY) long id;
+  String word;
+  String nbrstars;
 }
