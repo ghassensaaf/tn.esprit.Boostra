@@ -42,7 +42,7 @@ public class Partner implements Serializable{
 	String country;
 	String email;
 	String logo;
-	int phone;
+	long phone;
 	
 	@Enumerated(EnumType.STRING)
 	TypePar typePartner;
@@ -50,7 +50,7 @@ public class Partner implements Serializable{
 	enum TypePar{
 		EventPartner,ActivityPartner
 	}
-	
+	@JsonIgnore
 	@ManyToMany
 	private List<Event> events;
 	
@@ -58,7 +58,7 @@ public class Partner implements Serializable{
     private Contract contract;
 	
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy="partner")
 	private List<Offer> offers;
 	

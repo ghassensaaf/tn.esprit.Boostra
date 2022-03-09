@@ -29,8 +29,10 @@ public class OfferService implements IOfferService{
 	}
 
 	@Override
-	public Offer updateOffer(Offer offer) {
+	public Offer updateOffer(Offer offer, long partnerId) {
 		// TODO Auto-generated method stub
+		Partner partner = pr.findById(partnerId).orElseGet(null);
+		offer.setPartner(partner);
 		return or.save(offer);
 	}
 

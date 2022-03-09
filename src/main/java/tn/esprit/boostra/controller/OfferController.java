@@ -28,10 +28,10 @@ public class OfferController {
 	}
 	
 	@PutMapping("/Offer/Update")
-	public Offer updateOffer(@RequestBody Offer offer, @RequestParam("offerId") long offerId) {
+	public Offer updateOffer(@RequestBody Offer offer, @RequestParam("offerId") long offerId, @RequestParam("partnerId") long partnerId) {
 		
 		offer.setId(offerId);
-		return  os.updateOffer(offer);
+		return  os.updateOffer(offer, partnerId);
 	}
 	
 	 @DeleteMapping("/Offer/Delete")

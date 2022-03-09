@@ -37,9 +37,9 @@ public class ContractRestController {
 	}
 	
 	@PutMapping("/contract/Update")
-	public Contract updateContract(@RequestBody Contract contract, @RequestParam("contractId") long contractId) {
+	public Contract updateContract(@RequestBody Contract contract, @RequestParam("contractId") long contractId , @RequestParam("partnerId") long partnerId) throws JSONException, IOException{
 		contract.setId(contractId);
-		return cs.updateContract(contract);
+		return cs.updateContract(contract, partnerId);
 	}
 	
 	@DeleteMapping("/contract/Delete")

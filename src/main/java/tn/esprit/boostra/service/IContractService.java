@@ -11,7 +11,7 @@ import tn.esprit.boostra.entity.Contract;
 public interface IContractService {
 	
 	Contract addContract (Contract contract, long partnerId) throws JSONException, IOException;
-	Contract updateContract(Contract contract);
+	Contract updateContract(Contract contract, long partnerId) throws JSONException, IOException;
 	void deleteContract(long contractId);
 	List<Contract> getAllContract();
 	Contract getById(long contractId);
