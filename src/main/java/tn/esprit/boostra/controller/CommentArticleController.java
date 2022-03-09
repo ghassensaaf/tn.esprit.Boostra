@@ -3,6 +3,7 @@ package tn.esprit.boostra.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
 import tn.esprit.boostra.entity.Article;
 import tn.esprit.boostra.entity.Comment;
 import tn.esprit.boostra.service.IArticleService;
 import tn.esprit.boostra.service.ICommentsArticleService;
-
+@Slf4j
 @RestController
 public class CommentArticleController {
 
@@ -32,10 +34,8 @@ public class CommentArticleController {
 	}
 	
 	@PutMapping("/ArticleComment/Update")
-	public Comment UpadateArticleComment(@RequestParam("CommentId") Long CommentId,@RequestBody Comment comment,@RequestParam("ArticleId") Long ArticleId)
+	public Comment UpadateArticleComment(@RequestParam("CommentId") Long CommentId,@RequestBody Comment comment)
 	{
-		Article article=As.GetArticle(ArticleId);
-		comment.setArticle(article);
 		comment.setId(CommentId);
 		return Cs.UpadateComment(comment);
 	}
@@ -53,6 +53,16 @@ public class CommentArticleController {
 	@GetMapping("/ArticleComment/GetComment/{CommentId}")
 	public Comment GetArticleComment(@PathVariable("CommentId") Long CommentId){
 		return  Cs.GetComment(CommentId);
+	}
+	@Scheduled(cron = "*/10 * * * * *")
+	public void MostReplied(){
+		String text = " \n MostReplied Article \n";
+		List<Article> articles = Cs.Mostreplied();
+		for (Article article : articles) {
+			text+= "ArticleTitle : "+article.getTitle()+"\n";
+		}
+		log.info(text);
+		text="";
 	}
 	
 }

@@ -46,6 +46,7 @@ public class User implements Serializable{
 	String picture;
 	String password;
 	Boolean active;
+	Long Number;
 	@Enumerated(EnumType.STRING)
 	Gender gender;
 
@@ -61,6 +62,9 @@ public class User implements Serializable{
 	
 	@OneToMany(mappedBy="user")
 	List<Article> articles = new ArrayList<>();
+	
+	@OneToMany(mappedBy="user")
+	List<Reclamation> Reclamations = new ArrayList<>();
 	
 	@OneToMany(mappedBy="user")
 	List<Post> posts = new ArrayList<>();

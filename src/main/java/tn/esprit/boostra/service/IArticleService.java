@@ -14,4 +14,7 @@ public interface IArticleService{
 	List<Article>GetAllArticle();
 	Article GetArticle(Long ArticleId) ;
 	Article ajouterArticle(Article article);
-}
+	public String RemoveBadWords(String text);
+	List<Article>MostlikedArticle();
+	
+	}

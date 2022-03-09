@@ -2,6 +2,7 @@ package tn.esprit.boostra.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import lombok.extern.slf4j.Slf4j;
 import tn.esprit.boostra.entity.Article;
 import tn.esprit.boostra.service.IArticleService;
-
+@Slf4j
 @RestController
 public class ArticleController {
 
@@ -22,6 +25,7 @@ public class ArticleController {
 	@PostMapping("/Article/Add")
 	public Article AddArticle(@RequestBody Article article)
 	{
+		
 		return As.ajouterArticle(article);
 	}
 	
@@ -47,5 +51,16 @@ public class ArticleController {
 	public Article GetArticle(@PathVariable("ArticleId") Long ArticleId){
 		return  As.GetArticle(ArticleId);
 	}
+	
+	@Scheduled(cron = "*/10 * * * * *")
+	public void Mostliked(){
+		String text = "\n Mostliked Article \n";
+	List<Article> article=As.MostlikedArticle();
+			for (Article ar : article) {
+				text+="ArticleTitle : " + ar.getTitle()+"\n";
+			}
+			log.info(text);
+			text="";
+			}
 	
 }

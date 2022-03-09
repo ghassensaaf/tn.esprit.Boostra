@@ -8,9 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.boostra.entity.Article;
+import tn.esprit.boostra.entity.BadWords;
 import tn.esprit.boostra.entity.Comment;
+import tn.esprit.boostra.entity.Reclamation;
 import tn.esprit.boostra.entity.User;
 import tn.esprit.boostra.repository.ArticleRepository;
+import tn.esprit.boostra.repository.BadWordsRepository;
 import tn.esprit.boostra.repository.CommentsArticleRepository;
 import tn.esprit.boostra.repository.UserRepository;
 @Service
@@ -22,9 +25,12 @@ public class CommentsArticleService implements ICommentsArticleService {
 	ArticleRepository Ar;
 	@Autowired
 	UserRepository Ur;
+	@Autowired
+	BadWordsRepository bdr;
 	
 	@Override
 	public Comment UpadateComment(Comment comment) {
+		Comment com = Cr.findById(comment.getId()).orElse(comment);
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username;
 		if (principal instanceof UserDetails) {
@@ -34,7 +40,9 @@ public class CommentsArticleService implements ICommentsArticleService {
 			}
 		User user=Ur.findByUserName(username);
 		comment.setUser(user);
-		return Cr.save(comment);
+		 String newContent = RemoveBadWords(comment.getContent());
+		 com.setContent(newContent);
+		return Cr.save(com);
 	}
 
 	@Override
@@ -63,8 +71,7 @@ public class CommentsArticleService implements ICommentsArticleService {
 
 	@Override
 	public Comment GetComment(Long CommentId) {
-		return Cr.findById(CommentId).orElse(null);
-	}
+		return Cr.findById(CommentId).orElse(null);}
 
 	@Override
 	public Comment ajouterComment(Comment comment, Long ArticleId) {
@@ -79,7 +86,25 @@ public class CommentsArticleService implements ICommentsArticleService {
 		comment.setUser(user);
 	 Article article=Ar.findById(ArticleId).orElse(null);
 	 comment.setArticle(article);
+	 String newContent = RemoveBadWords(comment.getContent());
+		comment.setContent(newContent);
 		return Cr.save(comment) ;
+	}
+	
+	
+	public String	RemoveBadWords(String text)
+	 {
+		List<BadWords> badwords =(List<BadWords>) bdr.findAll();
+	
+		for (BadWords badWord : badwords) {
+			text=text.replaceAll(badWord.getWord(),badWord.getNbrstars());
+		}
+		return text;
+	 }
+
+	@Override
+	public List<Article> Mostreplied() {
+		return Cr.Mostreplied();
 	}
 
 }

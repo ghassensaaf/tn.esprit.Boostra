@@ -12,4 +12,5 @@ public interface ICommentsArticleService {
 	List<Comment>GetAllComment(Long ArticleId);
 	Comment GetComment(Long CommentId) ;
 	Comment ajouterComment(Comment comment,Long articleId);
+	public 	List<Article>Mostreplied();
 }
