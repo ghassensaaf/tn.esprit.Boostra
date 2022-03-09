@@ -116,7 +116,7 @@ public class ContractService implements IContractService {
 			if (contract.isRenewing()) {
 				contract.setStartDate(new Date());
 				if (contract.getTypeContract().toString().equals("Monthly")) {
-					c.add(Calendar.MONTH, 3);
+					c.add(Calendar.MONTH, 1);
 					contract.setEndDate(c.getTime());
 					msg += "Le Contract N° " + contract.getId() + " est renouvlable  \n";
 					msg += "New Start Date " + new Date() + "\n";

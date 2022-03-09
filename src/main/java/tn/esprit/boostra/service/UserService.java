@@ -29,8 +29,6 @@ public class UserService implements IUserService{
 	private EventRepository er;
 	@Autowired
 	private ActivityRepository ar;
-	@Autowired
-	private JavaMailSender emailSender;
 	
 	BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	
@@ -59,12 +57,6 @@ public class UserService implements IUserService{
 				event.setParticipantCount(event.getParticipantCount()+1);
 				ur.save(user);
 				er.save(event);
-//				SimpleMailMessage message = new SimpleMailMessage();
-//				message.setFrom("boostra@boostra.tn	");
-//		        message.setTo("saafghassen@gmail.com"); 
-//		        message.setSubject("hello"); 
-//		        message.setText("test");
-//		        emailSender.send(message);
 				return 1;
 			}
 			else return 0;
@@ -145,22 +137,5 @@ public class UserService implements IUserService{
          
     }
 	
-	@Bean
-	public JavaMailSender getJavaMailSender() {
-	    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-	    mailSender.setHost("mail.lancersent.tn");
-	    mailSender.setPort(587);
-	    
-	    mailSender.setUsername("info@lancersent.tn");
-	    mailSender.setPassword("Za3maettal3ou");
-	    
-	    Properties props = mailSender.getJavaMailProperties();
-	    props.put("mail.transport.protocol", "smtp");
-	    props.put("mail.smtp.auth", "true");
-	    props.put("mail.smtp.starttls.enable", "true");
-	    props.put("mail.debug", "true");
-	    
-	    return mailSender;
-	}
 
 }
