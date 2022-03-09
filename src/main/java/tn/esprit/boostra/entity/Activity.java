@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -39,18 +41,18 @@ public class Activity implements Serializable{
 	String name; 
 	String description;
 	String picture;
+	String location;
+	Date startDate;
+	Date endDate;
+	double price;
 	int maxParticipants;
 	int nbrParticipants;
-	@Enumerated(EnumType.STRING)
-	TypeAc typeActivity;
 	
-	enum TypeAc{
-		music,formation,sport,teambuilding
-	}
-
-	@ManyToMany(mappedBy="Activities")
+	@JsonIgnore
+	@ManyToMany(mappedBy="activities", fetch = FetchType.EAGER)
 	private List<User> Users;
 	
-	@OneToMany(mappedBy="activity")
-	List<Subscription> subs;
+	@ManyToOne	
+    Interest interest;
+	
 }

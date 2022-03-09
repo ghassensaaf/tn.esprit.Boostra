@@ -46,6 +46,10 @@ public class User implements Serializable{
 	String picture;
 	String password;
 	Boolean active;
+	Long Number;
+	@Enumerated(EnumType.STRING)
+    private Provider provider;
+	
 	@Enumerated(EnumType.STRING)
 	Gender gender;
 
@@ -53,16 +57,20 @@ public class User implements Serializable{
 		Male,Female
 	}
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Event> Events;
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Activity> Activities;
+	@ManyToMany()
+	private List<Event> events;
 	
-	@OneToMany(mappedBy="user")
-	List<Subscription> subs;
+	@ManyToMany()
+	private List<Activity> activities;
+	
+	@ManyToMany()
+	private List<Interest> interests;
 	
 	@OneToMany(mappedBy="user")
 	List<Article> articles = new ArrayList<>();
+	
+	@OneToMany(mappedBy="user")
+	List<Reclamation> Reclamations = new ArrayList<>();
 	
 	@OneToMany(mappedBy="user")
 	List<Post> posts = new ArrayList<>();
@@ -88,6 +96,7 @@ public class User implements Serializable{
 	
 	@OneToMany(mappedBy="user")
 	List<Notification> notifications= new ArrayList<>();
+		 
 	
 	@ManyToOne
 	private Badge badge;
