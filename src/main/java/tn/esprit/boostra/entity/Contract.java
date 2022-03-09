@@ -23,7 +23,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-import tn.esprit.boostra.entity.Subscription.TypeSub;
 @Entity
 @Getter
 @Setter

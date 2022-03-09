@@ -10,7 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -39,14 +42,21 @@ public class Event implements Serializable{
 	String picture;
 	Date startDate;
 	Date endDate;
+	Double Price;
 	int participantCount;
 	int maxParticipants;
 	
-	@ManyToMany(mappedBy="Events")
+	@JsonIgnore
+	@ManyToMany(mappedBy="events", fetch = FetchType.EAGER)
 	private List<User> Users;
+	
 	@ManyToMany(mappedBy="events")
 	private List<Partner> partners;
 	
 	@OneToMany(mappedBy="event")
 	private List<Ad> ads ;
+
+	@JsonIgnore
+	@ManyToOne	
+    Interest interest;
 }

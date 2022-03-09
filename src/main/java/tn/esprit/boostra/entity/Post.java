@@ -1,6 +1,7 @@
 package tn.esprit.boostra.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -20,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-import tn.esprit.boostra.entity.Activity.TypeAc;
+
 
 @Entity
 @Getter
@@ -40,10 +46,20 @@ public class Post implements Serializable{
 	@Enumerated(EnumType.STRING)
 	TypePs typePost;
 	
-	enum TypePs{
-		Status, Picture, Video
-	}
+//	enum TypePs{
+//		Status, Picture, Video
+//	}
 	
+	@JsonIgnore
 	@ManyToOne
 	private User user;
+	
+	@OneToMany(mappedBy="post")
+	private List<Comment> comments= new ArrayList<>();
+	
+	@ManyToMany
+	private List<Tag> tags= new ArrayList<>();
+	
+	@OneToOne
+	private GeoIP geoip;
 }
